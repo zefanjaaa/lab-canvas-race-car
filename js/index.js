@@ -10,8 +10,8 @@ class Game {
   startGame() {
     const canvas = document.getElementById("canvas");
     this.ctx = canvas.getContext("2d");
-    const car = new Car(100, 100, 250, 400);
-    const block1 = new Block()
+    const car = new Car(50, 50, 250, 400);
+    const block1 = new Block();
     this.player = car;
     this.obstacle = block1;
     const background = new Image();
@@ -39,7 +39,7 @@ class Game {
       this.ctx.drawImage(
         this.obstacle.block,
         block.posX,
-        block.posY,
+        (block.posY += 2),
         block.width,
         block.height
       );
@@ -54,7 +54,7 @@ class Game {
       this.ctx.clearRect(0, 0, 500, 700);
       this.ctx.drawImage(this.bg, 0, 0, 500, 700);
       this.drawPlayer();
-
+      this.drawObstacle();
       this.frame += 5;
       if (this.frame % 120 === 0) {
         let blockk = Math.random() * 410;
@@ -108,11 +108,13 @@ class Block {
     this.block = this.createBlock();
   }
 
-  imageBlock() {
-    
-  }
   createBlock() {
-    
+    const block = new Image();
+    block.src = "./images/roadblockimage-removebg-preview.png";
+    this.width = 30;
+    this.height = 30;
+
+    return block;
   }
 }
 window.onload = () => {
